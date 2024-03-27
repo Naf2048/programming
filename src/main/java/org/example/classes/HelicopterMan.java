@@ -23,7 +23,7 @@ public class HelicopterMan extends Human implements Findable {
     }
 
     public void checkLocation(){
-        System.out.println(this.getName() + " сейчас находится в: " + this.getLocation().getLocationNow());
+        System.out.println("\n"+this.getName() + " сейчас находится в: " + this.getLocation().getLocationNow());
     }
 
 }

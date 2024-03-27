@@ -5,12 +5,13 @@ import java.util.Arrays;
 public enum Geolocation {
     HOME_ROOM("дом - комната малыша"),
     SCHOOL("школа"),
+    DACHA("дача"),
     UNKNOWN("(неизвестно)");
 
 
     private final String location;
     String[] contains;
-    Geolocation(String location_now){location = location_now;}
+    Geolocation(String locationNow){location = locationNow;}
 
     public String getLocationNow() {
         return location;

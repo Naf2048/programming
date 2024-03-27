@@ -5,40 +5,39 @@ import org.example.enums.*;
 
 public class Main {
     public static void main(String[] args) {
-        HelicopterMan Karlson = new HelicopterMan("Карлсон", Geolocation.UNKNOWN);
-        Child Malish = new Child("Малыш", Geolocation.UNKNOWN);
+        HelicopterMan karlson = new HelicopterMan("Карлсон", Geolocation.UNKNOWN);
+        Child malish = new Child("Малыш", Geolocation.HOME_ROOM, KnowlegeQuality.UNCONFIRMED, KnowlegeQuality.UNCONFIRMED, KnowlegeQuality.UNCONFIRMED, KnowlegeQuality.UNCONFIRMED ,KnowlegeQuality.UNCONFIRMED);
+        HelicopterGrandma granny = new HelicopterGrandma( null, null);
+        Friends Friends = new Friends( "друзья",Geolocation.DACHA);
 
-        int dayCount = (int) (Math.random() * 11 + 5);
+        int dayNumber = (int) (Math.random() * 10  + 100);
+        int weekendsDays = 86;// в угоду упрощения считаю дни на каникулах уже добавленными к счетчику дней
+        Week todaysDay = Week.SATURDAY;
+        boolean doggy = true;//статус собаки буквально значит у хозяина она или нет: true - рядом с ним, false - украли :(
 
         SideObjects blanket = SideObjects.BLANKET;
         SideObjects window = SideObjects.WINDOW;
         SideObjects textbook = SideObjects.TEXTBOOK;
 
+        malish.setAllGradesSubject(KnowlegeQuality.AMAZING,KnowlegeQuality.GOOD,KnowlegeQuality.GOOD,KnowlegeQuality.FINE,KnowlegeQuality.AMAZING);
         System.out.println("Начало истории");
-        Karlson.checkLocation();
+        malish.searchInformation(granny);
+        todaysDay = malish.sleep(todaysDay);
+        todaysDay = malish.travel(Geolocation.DACHA,doggy, weekendsDays, todaysDay);
 
-        for (int i = 0; i < dayCount; i++) {
-
-            if (i == 0) {
-                System.out.println("\n - День " + (i + 1));
-                Malish.run(Geolocation.HOME_ROOM, window);
-            } else {
-                System.out.println(" - День " + (i + 1));
-                Malish.run(Geolocation.SCHOOL, textbook);
-                if ((i+1) % ((int) (Math.random() * 4 + 3)) == 0) {
-                    Malish.think(Karlson);
-                }
-                Malish.run(Geolocation.HOME_ROOM, null);
-                if ((i+1) % ((int) (Math.random() * 2 + 2)) == 0) {
-                    Malish.think(Karlson);
-                }
-            }
-            Malish.cover(blanket);
-            Malish.cry(i, Karlson.find());
-            Malish.sleep();
-            System.out.println("\n");
+        for (int i = 0;i<weekendsDays;i++){
+            todaysDay = DaysAndDailyActivity.DailyActionOnLocation(malish.getLocation(),malish,todaysDay,Friends,karlson);
         }
-        Karlson.checkLocation();
+        todaysDay = malish.travel(Geolocation.HOME_ROOM,doggy, 0, todaysDay);
+        malish.setLocation(Geolocation.SCHOOL);//малыш готовиться ко школе
+        for (int i = 0;i <dayNumber-weekendsDays;i++){
+            todaysDay = DaysAndDailyActivity.DailyActionOnLocation(malish.getLocation(),malish,todaysDay,Friends,karlson);
+            if (todaysDay==Week.FINALDAY){
+                i = dayNumber-weekendsDays;
+            }
+        }
+
+        karlson.checkLocation();
         System.out.println("\nКонец истории.");
     }
 }

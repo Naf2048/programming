@@ -8,6 +8,6 @@ public enum SideObjects {
 
 
     private final String name;
-    SideObjects(String rus_name) { name = rus_name;}
+    SideObjects(String rusName) { name = rusName;}
     public String getObjectRuName(){return name;}
 }

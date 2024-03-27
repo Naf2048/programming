@@ -1,5 +1,8 @@
 package org.example.interfaces;
 
+import org.example.enums.Week;
+
 public interface Sleepable {
-    void sleep();
+
+    Week sleep(Week day);
 }

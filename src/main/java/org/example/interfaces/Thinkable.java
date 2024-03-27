@@ -1,7 +1,6 @@
 package org.example.interfaces;
 
-import org.example.classes.HelicopterMan;
-
-public interface Thinkable {
-    void think(HelicopterMan friend);
+@FunctionalInterface
+public interface Thinkable<T> {
+    void think(T friend);
 }
